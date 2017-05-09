@@ -1,6 +1,8 @@
-package com.thedeveloperworldisyours.kinghearts.utils;
+package com.thedeveloperworldisyours.kinghearts.utils.scheduler;
 
 import android.support.annotation.NonNull;
+
+import com.thedeveloperworldisyours.kinghearts.utils.scheduler.BaseSchedulerProvider;
 
 import rx.Scheduler;
 import rx.schedulers.Schedulers;

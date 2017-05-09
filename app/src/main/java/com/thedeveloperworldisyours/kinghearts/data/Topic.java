@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by javierg on 09/05/2017.
  */
 
-public class Topics {
+public class Topic {
 
     @SerializedName("id")
     @Expose
@@ -16,7 +16,7 @@ public class Topics {
     @Expose
     private String name;
 
-    public Topics(Integer id, String name) {
+    public Topic(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -37,8 +37,8 @@ public class Topics {
         this.name = name;
     }
 
-    public static Topics create(Integer id, String name) {
-        return new Topics(id, name);
+    public static Topic create(Integer id, String name) {
+        return new Topic(id, name);
     }
 
 }

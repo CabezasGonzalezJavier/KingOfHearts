@@ -1,4 +1,4 @@
-package com.thedeveloperworldisyours.kinghearts.utils;
+package com.thedeveloperworldisyours.kinghearts.utils.scheduler;
 
 import android.support.annotation.NonNull;
 

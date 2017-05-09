@@ -1,7 +1,9 @@
 package com.thedeveloperworldisyours.kinghearts;
 
-import com.thedeveloperworldisyours.kinghearts.utils.BaseSchedulerProvider;
-import com.thedeveloperworldisyours.kinghearts.utils.SchedulerProvider;
+import android.content.Context;
+
+import com.thedeveloperworldisyours.kinghearts.utils.scheduler.BaseSchedulerProvider;
+import com.thedeveloperworldisyours.kinghearts.utils.scheduler.SchedulerProvider;
 
 import javax.inject.Singleton;
 
@@ -14,17 +16,20 @@ import dagger.Provides;
 @Module
 public class AppModule {
 
-    KingHeartsApplication mApplication;
+    private final Context mContext;
 
-    public AppModule(KingHeartsApplication mApplication) {
-        this.mApplication = mApplication;
+    AppModule(Context context) {
+        mContext = context;
     }
 
     @Provides
-    @Singleton
-    BaseSchedulerProvider provideScheduler() {
-        return new SchedulerProvider();
+    Context provideContext() {
+        return mContext;
     }
 
-
+    @Singleton
+    @Provides
+    BaseSchedulerProvider provideSchedulerProvider() {
+        return new SchedulerProvider();
+    }
 }

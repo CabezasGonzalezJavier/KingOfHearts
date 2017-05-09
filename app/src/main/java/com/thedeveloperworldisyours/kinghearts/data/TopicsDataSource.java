@@ -1,5 +1,7 @@
 package com.thedeveloperworldisyours.kinghearts.data;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 import rx.Observable;
@@ -9,5 +11,7 @@ import rx.Observable;
  */
 
 public interface TopicsDataSource {
-    Observable<List<Topics>> getTasks();
+    Observable<List<Topic>> getTopics();
+
+    void saveTopic(@NonNull Topic topic);
 }
