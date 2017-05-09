@@ -1,0 +1,13 @@
+package com.thedeveloperworldisyours.kinghearts;
+
+import javax.inject.Singleton;
+
+import dagger.Component;
+
+/**
+ * Created by javierg on 09/05/2017.
+ */
+@Singleton
+@Component(modules = AppModule.class)
+public interface AppComponent {
+}
