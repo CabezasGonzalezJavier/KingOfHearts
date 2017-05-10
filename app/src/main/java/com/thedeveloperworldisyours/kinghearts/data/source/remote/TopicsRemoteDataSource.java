@@ -1,9 +1,9 @@
-package com.thedeveloperworldisyours.kinghearts.data.remote;
+package com.thedeveloperworldisyours.kinghearts.data.source.remote;
 
 import android.support.annotation.NonNull;
 
 import com.thedeveloperworldisyours.kinghearts.data.Topic;
-import com.thedeveloperworldisyours.kinghearts.data.TopicsDataSource;
+import com.thedeveloperworldisyours.kinghearts.data.source.TopicsDataSource;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -20,7 +20,7 @@ import rx.Observable;
 
 public class TopicsRemoteDataSource implements TopicsDataSource {
 
-
+    private static TopicsRemoteDataSource INSTANCE;
     public static final int TIMER_HTTP_OK = 5;
 
     @Override
@@ -45,6 +45,13 @@ public class TopicsRemoteDataSource implements TopicsDataSource {
                 .build();
 
         return retrofit.create(Service.class);
+    }
+
+    public static TopicsRemoteDataSource getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new TopicsRemoteDataSource();
+        }
+        return INSTANCE;
     }
 
     @Override

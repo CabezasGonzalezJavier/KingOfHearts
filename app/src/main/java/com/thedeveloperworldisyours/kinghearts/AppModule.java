@@ -2,6 +2,9 @@ package com.thedeveloperworldisyours.kinghearts;
 
 import android.content.Context;
 
+import com.thedeveloperworldisyours.kinghearts.data.source.TopicsDataSource;
+import com.thedeveloperworldisyours.kinghearts.data.source.local.TopicsLocalDataSource;
+import com.thedeveloperworldisyours.kinghearts.data.source.remote.TopicsRemoteDataSource;
 import com.thedeveloperworldisyours.kinghearts.utils.scheduler.BaseSchedulerProvider;
 import com.thedeveloperworldisyours.kinghearts.utils.scheduler.SchedulerProvider;
 
@@ -16,20 +19,29 @@ import dagger.Provides;
 @Module
 public class AppModule {
 
-    private final Context mContext;
+    KingHeartsApplication mApplication;
 
-    AppModule(Context context) {
-        mContext = context;
+    AppModule(KingHeartsApplication application) {
+        mApplication = application;
     }
 
+    @Singleton
     @Provides
-    Context provideContext() {
-        return mContext;
+    TopicsDataSource provideTopicsLocalDataSource(Context context) {
+        return new TopicsLocalDataSource(context, provideSchedulerProvider());
     }
+
+    @Singleton
+    @Provides
+    TopicsDataSource provideTasksRemoteDataSource() {
+        return new TopicsRemoteDataSource();
+    }
+
 
     @Singleton
     @Provides
     BaseSchedulerProvider provideSchedulerProvider() {
         return new SchedulerProvider();
     }
+
 }

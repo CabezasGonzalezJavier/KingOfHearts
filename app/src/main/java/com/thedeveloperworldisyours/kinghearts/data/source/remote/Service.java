@@ -1,4 +1,4 @@
-package com.thedeveloperworldisyours.kinghearts.data.remote;
+package com.thedeveloperworldisyours.kinghearts.data.source.remote;
 
 import com.thedeveloperworldisyours.kinghearts.data.Topic;
 

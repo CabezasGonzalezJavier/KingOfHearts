@@ -1,18 +1,20 @@
-package com.thedeveloperworldisyours.kinghearts.data.local;
+package com.thedeveloperworldisyours.kinghearts.data.source.local;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;
 import com.thedeveloperworldisyours.kinghearts.data.Topic;
-import com.thedeveloperworldisyours.kinghearts.data.TopicsDataSource;
+import com.thedeveloperworldisyours.kinghearts.data.source.TopicsDataSource;
 import com.thedeveloperworldisyours.kinghearts.utils.scheduler.BaseSchedulerProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -25,6 +27,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 
 public class TopicsLocalDataSource implements TopicsDataSource {
+
+    @Nullable
+    private static TopicsLocalDataSource INSTANCE;
 
     @NonNull
     private final BriteDatabase mDatabaseHelper;
@@ -47,6 +52,19 @@ public class TopicsLocalDataSource implements TopicsDataSource {
                 return new Topic(Integer.valueOf(itemId), title);
         };
 
+
+    }
+    public static TopicsLocalDataSource getInstance(
+            @NonNull Context context,
+            @NonNull BaseSchedulerProvider schedulerProvider) {
+        if (INSTANCE == null) {
+            INSTANCE = new TopicsLocalDataSource(context, schedulerProvider);
+        }
+        return INSTANCE;
+    }
+
+    public static void destroyInstance() {
+        INSTANCE = null;
     }
 
     @Override
@@ -64,9 +82,8 @@ public class TopicsLocalDataSource implements TopicsDataSource {
     public void saveTopic(@NonNull Topic topic) {
         checkNotNull(topic);
         ContentValues values = new ContentValues();
-        values.put(TopicsPersistenceContract.TopicsEntry.COLUMN_NAME_ENTRY_ID, topic.getId());
+        values.put(TopicsPersistenceContract.TopicsEntry.COLUMN_NAME_ENTRY_ID, String.valueOf(topic.getId()));
         values.put(TopicsPersistenceContract.TopicsEntry.COLUMN_NAME_TITLE, topic.getName());
         mDatabaseHelper.insert(TopicsPersistenceContract.TopicsEntry.TABLE_NAME, values, SQLiteDatabase.CONFLICT_REPLACE);
     }
-
 }

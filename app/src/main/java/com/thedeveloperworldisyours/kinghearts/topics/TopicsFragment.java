@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.thedeveloperworldisyours.kinghearts.R;
 
-public class TopicsFragment extends Fragment {
+public class TopicsFragment extends Fragment implements TopicsContract.View{
 
     public TopicsFragment() {
         // Required empty public constructor
@@ -27,7 +27,11 @@ public class TopicsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_topics, container, false);
+        return inflater.inflate(R.layout.topics_fragment, container, false);
     }
 
+    @Override
+    public void setPresenter(TopicsContract.Presenter presenter) {
+
+    }
 }

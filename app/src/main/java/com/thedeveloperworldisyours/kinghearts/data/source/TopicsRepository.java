@@ -1,12 +1,18 @@
-package com.thedeveloperworldisyours.kinghearts.data;
+package com.thedeveloperworldisyours.kinghearts.data.source;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 
+import com.thedeveloperworldisyours.kinghearts.data.Topic;
+import com.thedeveloperworldisyours.kinghearts.utils.scheduler.BaseSchedulerProvider;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import rx.Observable;
 import rx.functions.Func1;
@@ -16,9 +22,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Created by javierg on 09/05/2017.
  */
-
+@Singleton
 public class TopicsRepository implements TopicsDataSource {
 
+//    @Nullable
+//    private static TopicsRepository INSTANCE = null;
 
     @NonNull
     private final TopicsDataSource mTopicsRemoteDataSource;
@@ -41,12 +49,24 @@ public class TopicsRepository implements TopicsDataSource {
     boolean mCacheIsDirty = false;
 
 
-    // Prevent direct instantiation.
-    private TopicsRepository(@NonNull TopicsDataSource tasksRemoteDataSource,
+//    // Prevent direct instantiation.
+//    @Inject
+    public TopicsRepository(@NonNull TopicsDataSource tasksRemoteDataSource,
                             @NonNull TopicsDataSource tasksLocalDataSource) {
         mTopicsRemoteDataSource = checkNotNull(tasksRemoteDataSource);
         mTopicsLocalDataSource = checkNotNull(tasksLocalDataSource);
     }
+
+//    public static TopicsRepository getInstance(@NonNull TopicsDataSource tasksRemoteDataSource,
+//                            @NonNull TopicsDataSource tasksLocalDataSource) {
+//        if (INSTANCE == null) {
+//            INSTANCE = new TopicsRepository(tasksRemoteDataSource, tasksLocalDataSource);
+//        }
+//        return INSTANCE;
+//    }
+
+//    @Inject
+//    BaseSchedulerProvider mScheduler;
 
     @Override
     public Observable<List<Topic>> getTopics() {

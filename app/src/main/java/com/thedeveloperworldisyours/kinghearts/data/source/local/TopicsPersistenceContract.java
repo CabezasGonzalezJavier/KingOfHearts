@@ -1,4 +1,4 @@
-package com.thedeveloperworldisyours.kinghearts.data.local;
+package com.thedeveloperworldisyours.kinghearts.data.source.local;
 
 import android.provider.BaseColumns;
 

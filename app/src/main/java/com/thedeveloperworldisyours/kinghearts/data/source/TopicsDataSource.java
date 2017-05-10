@@ -1,6 +1,8 @@
-package com.thedeveloperworldisyours.kinghearts.data;
+package com.thedeveloperworldisyours.kinghearts.data.source;
 
 import android.support.annotation.NonNull;
+
+import com.thedeveloperworldisyours.kinghearts.data.Topic;
 
 import java.util.List;
 
